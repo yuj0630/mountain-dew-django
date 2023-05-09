@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div style="width:1200px; margin:0px auto;">
+    <h2 style="text-align:center;">회원가입 게시판</h2><br>
+    <div style="text-align:right; margin-bottom:10px;">
+        <a href="{% url 'create' %}" class="btn btn-primary rounded-pill">create</a>
+        <a href="{% url 'update' %}" class="btn btn-primary rounded-pill">update</a>
+        <a href="{% url 'delete' %}" class="btn btn-primary rounded-pill">delete</a>
+    </div>
+    {% if blogs %}
+    <table style="text-align:center; width:1200px; border:1px solid black;" class="table">
+        <thead>
+            <tr class="th_color">
+                <th>id</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>산 코드</th>
+                <th>내용</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        {% for blog_list in blogs %}
+        <tbody>
+            <tr class="td_color">
+                <td>{{ blog_list.id }}</td>
+                <td>{{ blog_list.title }}</td>
+                <td>{{ blog_list.content }}</td>
+                <td>{{ blog_list.hikerid }}</td>
+                <td>{{ blog_list.content }}</td>
+                <td>{{ blog_list.postDate }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <div style="width:500px; margin:0px auto;">
+        <form action="" method="POST" style="max-width:500px;">
+            {% csrf_token %}
+            {% bootstrap_form blogForm %}
+            <button type="submit" class="btn btn-primary rounded-pill col-12">POST</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
